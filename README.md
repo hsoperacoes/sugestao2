@@ -234,7 +234,7 @@
 
   <script>
     // ======== CONFIG ========
-    const APP_URL = 'https://script.google.com/macros/s/AKfycbxu_jVaotWytMOQh4UCZetFZFOxgk5ePrOkaviDd-qKNPiu2_8BjCaNczAVZzaDwAbj/exec';
+    const APP_URL = 'https://script.google.com/macros/s/AKfycbxgDjsyhSGMLsx6wyXDah62dtVsG9ywwMMr3ndhhU5bWRTVtldt6aX5tpq1oKUKVvJ8Pw/exec';
 
     const $ = s=>document.querySelector(s), show=el=>el.classList.remove('hidden'), hide=el=>el.classList.add('hidden');
     const L = {on:()=>$('#loading').classList.add('show'), off:()=>$('#loading').classList.remove('show')};
