@@ -2,105 +2,106 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Mobile responsivo + pinch-zoom habilitado -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
   <title>HS — Comunicados & Combos</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <style>
     :root{
       --bg:#0b1220; --card:#121a2b; --muted:#8aa0bf; --txt:#e9eefc; --brand:#43b0ff;
-      --radius:18px; --shadow:0 14px 40px rgba(17,25,40,.32);
+      --radius:18px; --shadow:0 12px 36px rgba(17,25,40,.28);
       --ring:0 0 0 3px rgba(67,176,255,.18);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;font:500 17px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      margin:0;font:500 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--txt);
-      background:radial-gradient(1600px 800px at 85% -10%,#123,#0b1220),linear-gradient(60deg,#0b1220,#0a1020)
+      background:radial-gradient(1400px 700px at 85% -10%,#123,#0b1220),linear-gradient(60deg,#0b1220,#0a1020)
     }
 
-    /* >>> AUMENTAMOS A LARGURA ÚTIL DA PÁGINA */
-    .wrap{max-width:1560px;margin:0 auto;padding:30px}
-
-    /* TITLES */
-    .title{display:flex;align-items:center;gap:12px;margin:8px 0 6px}
-    .title i{background:#0f1828;border:1px solid #243149;color:#8fbef0;width:38px;height:38px;border-radius:10px;display:grid;place-items:center}
-    .title h2{font-size:26px;margin:0}
-    .subtitle{color:var(--muted);font-size:15px;margin-bottom:22px}
-
-    /* CARDS */
+    /* DESKTOP/LARGE (padrão) */
+    .wrap{max-width:1280px;margin:0 auto;padding:28px}
+    .title{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
+    .title i{background:#0f1828;border:1px solid #243149;color:#8fbef0;width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
+    .subtitle{color:var(--muted);font-size:14px;margin-bottom:18px}
     .panel{background:rgba(255,255,255,0.02);backdrop-filter:blur(2px);
       border:1px solid rgba(255,255,255,0.09);border-radius:18px;box-shadow:var(--shadow)}
-    .panel.pad{padding:20px}
+    .panel.pad{padding:18px}
 
-    /* >>> GRID MAIOR: combos 2.6fr x mural 1fr */
-    .home-grid{
-      display:grid;grid-template-columns: 2.6fr 1fr; gap:22px;
-      align-items:start;
-    }
-    @media(max-width:1100px){ .home-grid{grid-template-columns:1fr} }
+    /* Home grid – desktop 2 colunas, mural mais largo */
+    .home-grid{display:grid;grid-template-columns:3fr 2fr;gap:18px}
 
-    .card-heading{display:flex;align-items:center;gap:10px;margin:2px 0 12px}
+    .card-heading{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
     .card-heading i{color:#8fbef0}
-    .muted{color:var(--muted);font-size:14px}
+    .muted{color:var(--muted);font-size:13px}
 
-    /* TABELA COMBOS */
-    .combo-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
-    .combo-table thead th{font-weight:700;text-align:left;padding:12px 14px;background:#0f1828;border-bottom:1px solid #22324f;font-size:15px}
-    .combo-table tbody td{padding:12px 14px;border-bottom:1px solid #18243d}
-    /* >>> ALTURA DO CARD AUMENTADA */
-    .scroll{max-height:640px;overflow:auto;border:1px solid #1d2941;border-radius:16px}
+    /* Tabela combos */
+    .combo-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+    .combo-table thead th{font-weight:600;text-align:left;padding:10px 12px;background:#0f1828;border-bottom:1px solid #22324f}
+    .combo-table tbody td{padding:10px 12px;border-bottom:1px solid #18243d}
+    .scroll{max-height:460px;overflow:auto;border:1px solid #1d2941;border-radius:14px}
     .scroll::-webkit-scrollbar{height:10px;width:10px}
     .scroll::-webkit-scrollbar-thumb{background:#2a3a5b;border-radius:14px}
 
-    /* MURAL */
-    .mural{display:flex;flex-direction:column;gap:12px;max-height:640px;overflow:auto;padding-right:8px}
-    .note{background:#0f1828;border:1px solid #22324f;border-radius:14px;padding:14px}
-    .note h4{margin:0 0 6px;font-size:15px}
-    .note small{color:var(--muted);display:block;margin-top:8px}
+    /* Mural */
+    .mural{display:flex;flex-direction:column;gap:10px;max-height:460px;overflow:auto;padding-right:6px}
+    .note{background:#0f1828;border:1px solid #22324f;border-radius:14px;padding:12px}
+    .note h4{margin:0 0 6px;font-size:14px}
+    .note small{color:var(--muted);display:block;margin-top:6px}
 
-    /* CTA bottom */
-    .cta{display:flex;justify-content:center;margin:26px 0 0}
-    .btn{border:0;border-radius:12px;padding:14px 20px;cursor:pointer;font-weight:800}
+    /* CTA */
+    .cta{display:flex;justify-content:center;margin:22px 0 0}
+    .btn{border:0;border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:700}
     .btn-primary{background:linear-gradient(135deg,#43b0ff,#3aa1ff);color:#07101f;box-shadow:var(--shadow)}
     .btn-primary:active{transform:translateY(1px)}
     .btn-ghost{background:#0e1626;border:1px solid #2b3a5b;color:var(--txt)}
 
-    /* GATE (modal) */
-    .overlay{position:fixed;inset:0;background:rgba(7,12,22,.75);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:50}
+    /* Modal */
+    .overlay{position:fixed;inset:0;background:rgba(7,12,22,.72);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:50}
     .overlay.show{display:flex}
-    .gate{width:min(600px,92vw);background:#0f1626;border:1px solid #2a3a5b;border-radius:18px;padding:24px;box-shadow:var(--shadow)}
-    label{display:block;margin:8px 0 6px;color:var(--muted);font-size:15px}
+    .gate{width:min(560px,92vw);background:#0f1626;border:1px solid #2a3a5b;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+    label{display:block;margin:8px 0 6px;color:var(--muted);font-size:14px}
     select,input[type=text],textarea{
-      width:100%;background:#0e1626;border:1px solid #243149;border-radius:12px;
-      padding:12px 14px;color:var(--txt);outline:none;transition:.2s
-    }
+      width:100%;background:#0e1626;border:1px solid #243149;border-radius:12px;padding:12px 14px;color:var(--txt);outline:none;transition:.2s}
     select:focus,input:focus,textarea:focus{border-color:#37548a;box-shadow:var(--ring)}
     .row{display:grid;gap:12px}
     .row.cols-2{grid-template-columns:1fr 1fr}
 
-    /* LOADING */
+    /* Loading */
     .loading{position:fixed;inset:0;display:none;place-items:center;background:rgba(7,12,22,.72);backdrop-filter:blur(2px);z-index:60}
     .loading.show{display:grid}
-    .spinner{width:56px;height:56px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:#43b0ff;animation:spin 1s linear infinite}
+    .spinner{width:54px;height:54px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:#43b0ff;animation:spin 1s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
 
-    /* PORTAL (após login) */
+    /* Portal */
     .hidden{display:none !important}
-    .cards{display:grid;gap:18px;margin-top:12px}
+    .cards{display:grid;gap:16px;margin-top:10px}
     @media(min-width:900px){ .cards{grid-template-columns:repeat(4,1fr)} }
-    .card{background:var(--card);border:1px solid #1d2941;border-radius:var(--radius);
-      padding:18px;box-shadow:var(--shadow);cursor:pointer;position:relative;overflow:hidden}
+    .card{background:var(--card);border:1px solid #1d2941;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);cursor:pointer}
     .card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(17,25,40,.35)}
     .card i{font-size:22px;margin-right:10px;color:var(--brand)}
     .card h3{margin:0 0 6px;font-size:18px}
+
+    /* ===== MOBILE FULL-BLEED =====
+       Até 900px: cards em uma coluna, ocupando TODA a largura da viewport (edge-to-edge)
+    */
+    @media (max-width: 900px){
+      .wrap{max-width:none;padding:0}                 /* remove padding lateral do container */
+      .home-grid{grid-template-columns:1fr;gap:12px}  /* empilha os cards */
+      .panel.pad{padding:16px}                        /* leve ajuste de padding */
+      /* full-bleed: faz o card ocupar de borda a borda do aparelho */
+      .panel{border-radius:0;border-left:0;border-right:0}
+      .home-grid > .panel{margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw)}
+      .cta{margin:16px 0 0}
+    }
   </style>
 </head>
 <body>
 
   <!-- HOME -->
   <div class="wrap" id="home">
-    <div class="title"><i class="fa-solid fa-house"></i><h2>Home — Comunicados & Combos</h2></div>
+    <div class="title"><i class="fa-solid fa-house"></i><h2 style="margin:0">Home — Comunicados & Combos</h2></div>
     <div class="subtitle">Veja os recados e combos ativos. Selecione a filial para abrir o portal.</div>
 
     <div class="panel pad home-grid">
@@ -136,10 +137,10 @@
     </div>
   </div>
 
-  <!-- MODAL: Escolher filial -->
+  <!-- MODAL -->
   <div id="overlay" class="overlay">
     <div class="gate">
-      <h3 style="margin:0 0 10px">Escolha a filial</h3>
+      <h3 style="margin:0 0 8px">Escolha a filial</h3>
       <label for="g-filial">Filial</label>
       <select id="g-filial"></select>
 
@@ -155,7 +156,7 @@
         <select id="g-func"></select>
       </div>
 
-      <div class="row cols-2" style="margin-top:16px">
+      <div class="row cols-2" style="margin-top:14px">
         <button class="btn btn-ghost" id="cancel-gate" type="button">Cancelar</button>
         <button class="btn btn-primary" id="enter-gate" type="button">Entrar</button>
       </div>
@@ -180,38 +181,26 @@
         <div class="card" data-card="manutencoes"><h3><i class="fa-solid fa-toolbox"></i>Manutenções</h3></div>
       </div>
 
-      <!-- FORM: Produto -->
+      <!-- FORM PRODUTO -->
       <form id="form-produto" class="hidden" onsubmit="return enviar(event,'produto')">
-        <h3 style="margin:18px 0 10px">Produto</h3>
+        <h3 style="margin:16px 0 8px">Produto</h3>
         <div class="row cols-2">
-          <div>
-            <label for="p-item">Referência / Item</label>
-            <input id="p-item" type="text" placeholder="Ex.: 0241AX7EN" required>
-          </div>
-          <div>
-            <label for="p-cor">Cor</label>
-            <input id="p-cor" type="text" placeholder="Ex.: N10 (Preto)">
-          </div>
+          <div><label for="p-item">Referência / Item</label><input id="p-item" type="text" placeholder="Ex.: 0241AX7EN" required></div>
+          <div><label for="p-cor">Cor</label><input id="p-cor" type="text" placeholder="Ex.: N10 (Preto)"></div>
         </div>
         <div class="row cols-2">
-          <div>
-            <label for="p-tam">Tamanho</label>
-            <input id="p-tam" type="text" placeholder="PP / P / M / G / XG / …">
-          </div>
-          <div>
-            <label for="p-msg">Observações</label>
-            <input id="p-msg" type="text" placeholder="Qtd, urgência, vitrine, etc.">
-          </div>
+          <div><label for="p-tam">Tamanho</label><input id="p-tam" type="text" placeholder="PP / P / M / G / XG / …"></div>
+          <div><label for="p-msg">Observações</label><input id="p-msg" type="text" placeholder="Qtd, urgência, vitrine, etc."></div>
         </div>
-        <div class="row cols-2" style="margin-top:12px">
+        <div class="row cols-2" style="margin-top:10px">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </form>
 
-      <!-- FORM: Ferramentas -->
+      <!-- FORM FERRAMENTAS -->
       <form id="form-ferramentas" class="hidden" onsubmit="return enviar(event,'ferramentas')">
-        <h3 style="margin:18px 0 10px">Ferramentas</h3>
+        <h3 style="margin:16px 0 8px">Ferramentas</h3>
         <div class="row cols-2">
           <div>
             <label for="f-app">Ferramenta</label>
@@ -229,39 +218,33 @@
         </div>
         <label for="f-msg">Mensagem</label>
         <textarea id="f-msg" placeholder="Descreva sua dúvida, reclamação ou sugestão" required></textarea>
-        <div class="row cols-2" style="margin-top:12px">
+        <div class="row cols-2" style="margin-top:10px">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </form>
 
-      <!-- FORM: Geral -->
+      <!-- FORM GERAL -->
       <form id="form-geral" class="hidden" onsubmit="return enviar(event,'geral')">
-        <h3 style="margin:18px 0 10px">Geral</h3>
+        <h3 style="margin:16px 0 8px">Geral</h3>
         <label for="g-msg">Mensagem</label>
         <textarea id="g-msg" placeholder="Escreva livremente" required></textarea>
-        <div class="row cols-2" style="margin-top:12px">
+        <div class="row cols-2" style="margin-top:10px">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </form>
 
-      <!-- FORM: Manutenções -->
+      <!-- FORM MANUTENÇÕES -->
       <form id="form-manutencoes" class="hidden" onsubmit="return enviar(event,'manutencoes')">
-        <h3 style="margin:18px 0 10px">Manutenções</h3>
+        <h3 style="margin:16px 0 8px">Manutenções</h3>
         <div class="row cols-2">
-          <div>
-            <label for="m-equip">Equipamento</label>
-            <input id="m-equip" type="text" placeholder="Ex.: Busca Preço" required>
-          </div>
-          <div>
-            <label for="m-tipo">Qual manutenção</label>
-            <input id="m-tipo" type="text" placeholder="Ex.: Não está funcionando" required>
-          </div>
+          <div><label for="m-equip">Equipamento</label><input id="m-equip" type="text" placeholder="Ex.: Busca Preço" required></div>
+          <div><label for="m-tipo">Qual manutenção</label><input id="m-tipo" type="text" placeholder="Ex.: Não está funcionando" required></div>
         </div>
         <label for="m-obs">Observações</label>
         <textarea id="m-obs" placeholder="Descreva o que aconteceu (ex.: busca preço parou de funcionar.)" required></textarea>
-        <div class="row cols-2" style="margin-top:12px">
+        <div class="row cols-2" style="margin-top:10px">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
@@ -274,7 +257,6 @@
 
   <script>
     // ========= CONFIG =========
-    // sua URL de teste:
     const APP_URL = 'https://script.google.com/macros/s/AKfycbxgDjsyhSGMLsx6wyXDah62dtVsG9ywwMMr3ndhhU5bWRTVtldt6aX5tpq1oKUKVvJ8Pw/exec';
 
     const $ = s=>document.querySelector(s),
@@ -285,7 +267,6 @@
     let FILIAIS=[]; 
     let CONTEXTO={codigo:'',razao:'',ident:false,funcionario:''};
 
-    // ========= API helpers =========
     async function apiGet(params){
       const url = APP_URL + '?' + new URLSearchParams(params).toString();
       const r = await fetch(url,{method:'GET'});
@@ -302,7 +283,6 @@
       return json;
     }
 
-    // ========= HOME (combos + mural) =========
     async function bootHome(){
       try{
         L.on();
@@ -312,7 +292,7 @@
       }catch(e){
         console.error(e);
         $('#combos-body').innerHTML = `<tr><td class="muted" colspan="4">Falha ao carregar.</td></tr>`;
-        $('#mural-list').innerHTML  = `<div class="muted">Falha ao carregar.</div>`;
+        $('#mural-list').innerHTML = `<div class="muted">Falha ao carregar.</div>`;
       }finally{ L.off(); }
     }
     function renderCombos(list){
@@ -339,7 +319,6 @@
       `).join('');
     }
 
-    // ========= Gate / Filiais =========
     async function openGate(){
       $('#overlay').classList.add('show');
       try{
@@ -351,9 +330,8 @@
         await atualizarIdentGate();
         $('#g-filial').addEventListener('change', atualizarIdentGate, {once:true});
         document.querySelectorAll('input[name="g-ident"]').forEach(r=>r.addEventListener('change', atualizarIdentGate));
-      }catch(err){
-        alert('Erro ao carregar filiais: '+err.message);
-      }finally{ L.off(); }
+      }catch(err){ alert('Erro ao carregar filiais: '+err.message) }
+      finally{ L.off(); }
     }
     async function atualizarIdentGate(){
       const codigo=$('#g-filial').value; 
@@ -394,7 +372,6 @@
       }catch(err){ alert('Erro ao entrar: '+err.message) }
     }
 
-    // ========= Envio =========
     function resetar(){ hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes')) }
     async function enviar(ev,tipo){
       ev.preventDefault();
@@ -417,12 +394,10 @@
       return false;
     }
 
-    // ========= Utils =========
     function escapeHtml(s){ return String(s??'')
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
       .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-    // start
     window.addEventListener('load', bootHome);
     $('#open-gate').addEventListener('click', openGate);
     $('#cancel-gate').addEventListener('click', closeGate);
