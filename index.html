@@ -288,13 +288,15 @@
         L.on();
         const home = await apiGet({fn:'getHome'});
         renderCombos(home.combos||[]);
-        renderMural(home.mural||[]);
+        // FIX: backend retorna "recados"
+        renderMural(home.recados||[]);
       }catch(e){
         console.error(e);
         $('#combos-body').innerHTML = `<tr><td class="muted" colspan="4">Falha ao carregar.</td></tr>`;
         $('#mural-list').innerHTML = `<div class="muted">Falha ao carregar.</div>`;
       }finally{ L.off(); }
     }
+
     function renderCombos(list){
       const tb = $('#combos-body');
       if(!list.length){ tb.innerHTML = `<tr><td class="muted" colspan="4">Nenhum combo cadastrado.</td></tr>`; return; }
@@ -307,14 +309,18 @@
         </tr>
       `).join('');
     }
+
+    // FIX: usa campos do backend: mensagem, quando, autor
     function renderMural(list){
       const box = $('#mural-list');
-      if(!list.length){ box.innerHTML = `<div class="muted">Sem recados no momento.</div>`; return; }
+      if(!list.length){
+        box.innerHTML = `<div class="muted">Sem recados no momento.</div>`;
+        return;
+      }
       box.innerHTML = list.map(n=>`
         <div class="note">
-          <h4>${escapeHtml(n.titulo||'')}</h4>
           <div>${escapeHtml(n.mensagem||'')}</div>
-          <small>${escapeHtml(n.data||'')} — ${escapeHtml(n.autor||'-')}</small>
+          <small>${escapeHtml(n.quando||'')}${n.autor ? ' — ' + escapeHtml(n.autor) : ''}</small>
         </div>
       `).join('');
     }
@@ -333,6 +339,7 @@
       }catch(err){ alert('Erro ao carregar filiais: '+err.message) }
       finally{ L.off(); }
     }
+
     async function atualizarIdentGate(){
       const codigo=$('#g-filial').value; 
       const ident=document.querySelector('input[name="g-ident"]:checked').value==='sim';
@@ -348,6 +355,7 @@
         finally{ L.off(); }
       } else { hide($('#g-func-wrap')) }
     }
+
     function closeGate(){ $('#overlay').classList.remove('show'); }
 
     function entrarPortal(){
@@ -373,6 +381,7 @@
     }
 
     function resetar(){ hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes')) }
+
     async function enviar(ev,tipo){
       ev.preventDefault();
       const payload={ action:'submitRegistro', tipo, ...CONTEXTO };
