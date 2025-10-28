@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Viewport “fix”: abre sem zoom, evita autoscale de texto no mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
   <title>HS — Comunicados & Combos</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <style>
@@ -13,40 +14,30 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
+    html{-webkit-text-size-adjust:100%} /* evita zoom de texto no mobile */
     body{
       margin:0;font:500 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--txt);
       background:radial-gradient(1400px 700px at 85% -10%,#123,#0b1220),linear-gradient(60deg,#0b1220,#0a1020)
     }
 
-    /* >>> FIXO COMO DESKTOP MESMO NO MOBILE */
-    .wrap{
-      max-width:1320px;
-      min-width:1060px;   /* garante duas colunas lado a lado em telas pequenas */
-      margin:0 auto;
-      padding:28px;
-    }
+    /* Container maior (preenche mais no desktop) */
+    .wrap{max-width:min(1500px,94vw);margin:0 auto;padding:28px}
 
     /* TITLES */
     .title{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
     .title i{background:#0f1828;border:1px solid #243149;color:#8fbef0;width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
     .subtitle{color:var(--muted);font-size:14px;margin-bottom:18px}
 
-    /* CARDS/PAINEL */
+    /* CARDS */
     .panel{background:rgba(255,255,255,0.02);backdrop-filter:blur(2px);
       border:1px solid rgba(255,255,255,0.09);border-radius:18px;box-shadow:var(--shadow)}
     .panel.pad{padding:18px}
 
-    /* HOME GRID */
-    .home-grid{
-      display:grid;
-      grid-template-columns: 1.6fr 1.2fr; /* <<< mural mais largo (antes era 2fr 1fr) */
-      gap:18px;
-      align-items:start;
-    }
-    /* REMOVIDO o empilhamento em telas menores
+    /* HOME GRID  (agora ~60/40 para alargar o mural) */
+    .home-grid{display:grid;grid-template-columns: 3fr 2fr; gap:18px;}
+    @media(max-width:1200px){ .home-grid{grid-template-columns: 5fr 4fr;} } /* ainda largo */
     @media(max-width:980px){ .home-grid{grid-template-columns:1fr} }
-    */
 
     .card-heading{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
     .card-heading i{color:#8fbef0}
@@ -55,33 +46,25 @@
     /* TABELA COMBOS */
     .combo-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
     .combo-table thead th{font-weight:600;text-align:left;padding:10px 12px;background:#0f1828;border-bottom:1px solid #22324f}
-    .combo-table tbody td{padding:10px 12px;border-bottom:1px solid #18243d;vertical-align:top}
+    .combo-table tbody td{padding:10px 12px;border-bottom:1px solid #18243d}
     .scroll{max-height:520px;overflow:auto;border:1px solid #1d2941;border-radius:14px}
     .scroll::-webkit-scrollbar{height:10px;width:10px}
     .scroll::-webkit-scrollbar-thumb{background:#2a3a5b;border-radius:14px}
 
-    /* Ajustes de largura das colunas (mantive as suas proporções) */
-    .col-nome   {width:35%}
-    .col-art    {width:25%}
-    .col-valor  {width:20%}
-    .col-cond   {width:20%}
-
     /* MURAL */
     .mural{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow:auto;padding-right:6px}
-    .mural::-webkit-scrollbar{width:10px}
-    .mural::-webkit-scrollbar-thumb{background:#2a3a5b;border-radius:14px}
     .note{background:#0f1828;border:1px solid #22324f;border-radius:14px;padding:12px}
     .note h4{margin:0 0 6px;font-size:14px}
     .note small{color:var(--muted);display:block;margin-top:6px}
 
-    /* CTA inferior */
+    /* CTA bottom */
     .cta{display:flex;justify-content:center;margin:22px 0 0}
     .btn{border:0;border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:700}
     .btn-primary{background:linear-gradient(135deg,#43b0ff,#3aa1ff);color:#07101f;box-shadow:var(--shadow)}
     .btn-primary:active{transform:translateY(1px)}
     .btn-ghost{background:#0e1626;border:1px solid #2b3a5b;color:var(--txt)}
 
-    /* MODAL (selecionar filial) */
+    /* GATE (modal) */
     .overlay{position:fixed;inset:0;background:rgba(7,12,22,.72);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:50}
     .overlay.show{display:flex}
     .gate{width:min(560px,92vw);background:#0f1626;border:1px solid #2a3a5b;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
@@ -94,13 +77,7 @@
     .row{display:grid;gap:12px}
     .row.cols-2{grid-template-columns:1fr 1fr}
 
-    /* LOADING */
-    .loading{position:fixed;inset:0;display:none;place-items:center;background:rgba(7,12,22,.72);backdrop-filter:blur(2px);z-index:60}
-    .loading.show{display:grid}
-    .spinner{width:54px;height:54px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:#43b0ff;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* PORTAL (pós login) */
+    /* PORTAL (após login) */
     .hidden{display:none !important}
     .cards{display:grid;gap:16px;margin-top:10px}
     @media(min-width:900px){ .cards{grid-template-columns:repeat(4,1fr)} }
@@ -109,11 +86,24 @@
     .card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(17,25,40,.35)}
     .card i{font-size:22px;margin-right:10px;color:var(--brand)}
     .card h3{margin:0 0 6px;font-size:18px}
+
+    /* ————— MOBILE TUNING ————— */
+    @media (max-width: 480px){
+      body{font-size:15px}
+      .wrap{padding:18px}
+      .panel.pad{padding:14px}
+      .card-heading b{font-size:16px}
+      .scroll,.mural{max-height: calc(100vh - 260px);}  /* evita lista “infinita” na home */
+      .cta{margin:16px 0 0}
+      /* cabeçalhos mais compactos pra caber inteiro na tela */
+      .combo-table thead th{padding:8px 10px}
+      .combo-table tbody td{padding:8px 10px}
+    }
   </style>
 </head>
 <body>
 
-  <!-- HOME -->
+  <!-- HOME (só antes de escolher filial) -->
   <div class="wrap" id="home">
     <div class="title"><i class="fa-solid fa-house"></i><h2 style="margin:0">Home — Comunicados & Combos</h2></div>
     <div class="subtitle">Veja os recados e combos ativos. Selecione a filial para abrir o portal.</div>
@@ -126,10 +116,10 @@
           <table class="combo-table">
             <thead>
               <tr>
-                <th class="col-nome">Nome do combo</th>
-                <th class="col-art">Artigos</th>
-                <th class="col-valor">Valor</th>
-                <th class="col-cond">Condição</th>
+                <th style="width:35%">Nome do combo</th>
+                <th style="width:25%">Artigos</th>
+                <th style="width:20%">Valor</th>
+                <th style="width:20%">Condição</th>
               </tr>
             </thead>
             <tbody id="combos-body"><tr><td class="muted" colspan="4">Carregando…</td></tr></tbody>
@@ -137,7 +127,7 @@
         </div>
       </div>
 
-      <!-- Mural -->
+      <!-- Mural (mais largo agora) -->
       <div class="panel pad">
         <div class="card-heading"><i class="fa-solid fa-clipboard"></i><b>Mural de recados</b></div>
         <div class="mural" id="mural-list">
@@ -289,7 +279,7 @@
 
   <script>
     // ========= CONFIG =========
-    // mantém o seu App Web de teste
+    // use exatamente a URL do seu App Web publicada (sua versão de teste):
     const APP_URL = 'https://script.google.com/macros/s/AKfycbxgDjsyhSGMLsx6wyXDah62dtVsG9ywwMMr3ndhhU5bWRTVtldt6aX5tpq1oKUKVvJ8Pw/exec';
 
     const $ = s=>document.querySelector(s),
@@ -400,9 +390,11 @@
         CONTEXTO.funcionario = ident ? $('#g-func').value : '';
         $('#contexto').textContent = `${CONTEXTO.razao}${CONTEXTO.ident && CONTEXTO.funcionario? ' • '+CONTEXTO.funcionario : ''}`;
 
+        // fecha modal e troca de telas
         closeGate();
         hide($('#home')); show($('#portal'));
 
+        // bind dos cards de formulário
         document.querySelectorAll('.card').forEach(c=>c.onclick=()=>{
           hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes'));
           show($('#form-'+c.dataset.card));
@@ -411,7 +403,7 @@
       }catch(err){ alert('Erro ao entrar: '+err.message) }
     }
 
-    // ========= Envio =========
+    // ========= Envio dos formulários =========
     function resetar(){ hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes')) }
     async function enviar(ev,tipo){
       ev.preventDefault();
