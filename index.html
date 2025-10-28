@@ -106,9 +106,9 @@
           <table class="combo-table">
             <thead>
               <tr>
-                <th style="width:42%">Nome do combo</th>
-                <th style="width:18%">Artigos</th>
-                <th style="width:20%">Códigos</th>
+                <th style="width:35%">Nome do combo</th>
+                <th style="width:25%">Artigos</th>
+                <th style="width:20%">Valor</th>
                 <th style="width:20%">Condição</th>
               </tr>
             </thead>
