@@ -2,415 +2,349 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <!-- Mobile responsivo + pinch-zoom habilitado -->
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
-  <title>HS — Comunicados & Combos</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+  <title>HS Central — Avaliações & Reclamações</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b1220; --card:#121a2b; --muted:#8aa0bf; --txt:#e9eefc; --brand:#43b0ff;
-      --radius:18px; --shadow:0 12px 36px rgba(17,25,40,.28);
-      --ring:0 0 0 3px rgba(67,176,255,.18);
-    }
+    :root{ --bg:#0b1220;--muted:#8aa0bf;--txt:#e9eefc;--card:#121a2b;--brand:#43b0ff;--ok:#21c55d;--warn:#f59e0b;--err:#ef4444;--ring:0 0 0 3px rgba(67,176,255,.2);--radius:18px;--shadow:0 12px 36px rgba(17,25,40,.28) }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;font:500 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--txt);
-      background:radial-gradient(1400px 700px at 85% -10%,#123,#0b1220),linear-gradient(60deg,#0b1220,#0a1020)
-    }
-
-    /* DESKTOP/LARGE (padrão) */
-    .wrap{max-width:1280px;margin:0 auto;padding:28px}
-    .title{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
-    .title i{background:#0f1828;border:1px solid #243149;color:#8fbef0;width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
-    .subtitle{color:var(--muted);font-size:14px;margin-bottom:18px}
-    .panel{background:rgba(255,255,255,0.02);backdrop-filter:blur(2px);
-      border:1px solid rgba(255,255,255,0.09);border-radius:18px;box-shadow:var(--shadow)}
-    .panel.pad{padding:18px}
-
-    /* Home grid – desktop 2 colunas, mural mais largo */
-    .home-grid{display:grid;grid-template-columns:3fr 2fr;gap:18px}
-
-    .card-heading{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
-    .card-heading i{color:#8fbef0}
+    body{margin:0;background:linear-gradient(180deg,#0b1220 0%,#0d1526 60%,#0b1220 100%);color:var(--txt);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    .wrap{max-width:1100px;margin:32px auto;padding:0 16px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(90px 90px at 30% 30%,#5bd5ff 0%,#43b0ff 40%,#2d79ff 100%);box-shadow:var(--shadow)}
+    .brand h1{margin:0;font-size:clamp(20px,2.4vw,28px);font-weight:700;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:13px}
+    .card{background:linear-gradient(180deg,#121a2b 0%,#0f182b 100%);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero{margin:24px 0;padding:22px 22px;border-radius:var(--radius);display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    .hero h2{margin:0 0 8px;font-size:clamp(18px,2.2vw,24px)}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{padding:6px 10px;border-radius:999px;background:#0d1931;border:1px solid rgba(255,255,255,.08);font-size:12px;color:var(--muted)}
+    .panel{margin:20px 0;padding:18px}
+    .grid{display:grid;gap:14px}
+    @media(min-width:860px){.grid.cols-2{grid-template-columns:1fr 1fr}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+    label{font-weight:600;font-size:13px;margin-bottom:6px;display:block}
+    .row{display:grid;gap:6px}
+    input[type="text"],input[type="email"],select,textarea{ width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0e1629;color:var(--txt);outline:none }
+    textarea{min-height:120px;resize:vertical}
+    input:focus,select:focus,textarea:focus{box-shadow:var(--ring);border-color:#2f80ff}
+    .help{font-size:12px;color:var(--muted)}
+    .inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .switch{position:relative;width:50px;height:28px;background:#1a253a;border-radius:999px;border:1px solid rgba(255,255,255,.1);cursor:pointer}
+    .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:50%;background:#fff;transition:all .2s}
+    .switch.on{background:#1f3a5f}
+    .switch.on .knob{left:24px;background:#dff3ff}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:#0d1931;font-size:13px;cursor:pointer;user-select:none}
+    .chip input{appearance:none;width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center}
+    .chip input:checked{background:conic-gradient(from 210deg at 50% 50%,#2f80ff 0%,#43b0ff 100%);border-color:transparent}
+    .rating{display:flex;gap:6px}
+    .star{width:28px;height:28px;cursor:pointer;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
     .muted{color:var(--muted);font-size:13px}
-
-    /* Tabela combos */
-    .combo-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
-    .combo-table thead th{font-weight:600;text-align:left;padding:10px 12px;background:#0f1828;border-bottom:1px solid #22324f}
-    .combo-table tbody td{padding:10px 12px;border-bottom:1px solid #18243d}
-    .scroll{max-height:460px;overflow:auto;border:1px solid #1d2941;border-radius:14px}
-    .scroll::-webkit-scrollbar{height:10px;width:10px}
-    .scroll::-webkit-scrollbar-thumb{background:#2a3a5b;border-radius:14px}
-
-    /* Mural */
-    .mural{display:flex;flex-direction:column;gap:10px;max-height:460px;overflow:auto;padding-right:6px}
-    .note{background:#0f1828;border:1px solid #22324f;border-radius:14px;padding:12px}
-    .note h4{margin:0 0 6px;font-size:14px}
-    .note small{color:var(--muted);display:block;margin-top:6px}
-
-    /* CTA */
-    .cta{display:flex;justify-content:center;margin:22px 0 0}
-    .btn{border:0;border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:700}
-    .btn-primary{background:linear-gradient(135deg,#43b0ff,#3aa1ff);color:#07101f;box-shadow:var(--shadow)}
-    .btn-primary:active{transform:translateY(1px)}
-    .btn-ghost{background:#0e1626;border:1px solid #2b3a5b;color:var(--txt)}
-
-    /* Modal */
-    .overlay{position:fixed;inset:0;background:rgba(7,12,22,.72);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:50}
-    .overlay.show{display:flex}
-    .gate{width:min(560px,92vw);background:#0f1626;border:1px solid #2a3a5b;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
-    label{display:block;margin:8px 0 6px;color:var(--muted);font-size:14px}
-    select,input[type=text],textarea{
-      width:100%;background:#0e1626;border:1px solid #243149;border-radius:12px;padding:12px 14px;color:var(--txt);outline:none;transition:.2s}
-    select:focus,input:focus,textarea:focus{border-color:#37548a;box-shadow:var(--ring)}
-    .row{display:grid;gap:12px}
-    .row.cols-2{grid-template-columns:1fr 1fr}
-
-    /* Loading */
-    .loading{position:fixed;inset:0;display:none;place-items:center;background:rgba(7,12,22,.72);backdrop-filter:blur(2px);z-index:60}
-    .loading.show{display:grid}
-    .spinner{width:54px;height:54px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:#43b0ff;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* Portal */
-    .hidden{display:none !important}
-    .cards{display:grid;gap:16px;margin-top:10px}
-    @media(min-width:900px){ .cards{grid-template-columns:repeat(4,1fr)} }
-    .card{background:var(--card);border:1px solid #1d2941;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);cursor:pointer}
-    .card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(17,25,40,.35)}
-    .card i{font-size:22px;margin-right:10px;color:var(--brand)}
-    .card h3{margin:0 0 6px;font-size:18px}
-
-    /* ===== MOBILE FULL-BLEED =====
-       Até 900px: cards em uma coluna, ocupando TODA a largura da viewport (edge-to-edge)
-    */
-    @media (max-width: 900px){
-      .wrap{max-width:none;padding:0}                 /* remove padding lateral do container */
-      .home-grid{grid-template-columns:1fr;gap:12px}  /* empilha os cards */
-      .panel.pad{padding:16px}                        /* leve ajuste de padding */
-      /* full-bleed: faz o card ocupar de borda a borda do aparelho */
-      .panel{border-radius:0;border-left:0;border-right:0}
-      .home-grid > .panel{margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw)}
-      .cta{margin:16px 0 0}
-    }
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    button{appearance:none;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,#1c2b49 0%,#18243d 100%);color:var(--txt);font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(180deg,#46b7ff 0%,#2f80ff 100%);border:none;color:#0b1220}
+    .btn-ghost{background:#0f192e}
+    .notice{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0f192e;display:flex;gap:10px;align-items:flex-start}
+    .notice.ok{border-color:rgba(33,197,93,.35)}
+    .notice.err{border-color:rgba(239,68,68,.35)}
+    .hidden{display:none!important}
+    footer{margin:28px 0 40px;color:var(--muted);font-size:12px;text-align:center}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:10px 0 6px}
+    .proto{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:#0d1931;border-radius:10px;padding:6px 8px;display:inline-block}
   </style>
 </head>
 <body>
-
-  <!-- HOME -->
-  <div class="wrap" id="home">
-    <div class="title"><i class="fa-solid fa-house"></i><h2 style="margin:0">Home — Comunicados & Combos</h2></div>
-    <div class="subtitle">Veja os recados e combos ativos. Selecione a filial para abrir o portal.</div>
-
-    <div class="panel pad home-grid">
-      <!-- Combos -->
-      <div class="panel pad">
-        <div class="card-heading"><i class="fa-solid fa-tags"></i><b>Combos ativos</b></div>
-        <div class="scroll" id="combos-box">
-          <table class="combo-table">
-            <thead>
-              <tr>
-                <th style="width:35%">Nome do combo</th>
-                <th style="width:25%">Artigos</th>
-                <th style="width:20%">Valor</th>
-                <th style="width:20%">Condição</th>
-              </tr>
-            </thead>
-            <tbody id="combos-body"><tr><td class="muted" colspan="4">Carregando…</td></tr></tbody>
-          </table>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">👕</div>
+        <div>
+          <h1>HS Central — Avaliações & Reclamações</h1>
+          <div class="sub">Sua opinião ajuda a melhorar a experiência em todas as lojas.</div>
         </div>
       </div>
-
-      <!-- Mural -->
-      <div class="panel pad">
-        <div class="card-heading"><i class="fa-solid fa-clipboard"></i><b>Mural de recados</b></div>
-        <div class="mural" id="mural-list">
-          <div class="muted">Carregando…</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta">
-      <button class="btn btn-primary" id="open-gate"><i class="fa-solid fa-shop"></i> &nbsp;Escolher filial</button>
-    </div>
-  </div>
-
-  <!-- MODAL -->
-  <div id="overlay" class="overlay">
-    <div class="gate">
-      <h3 style="margin:0 0 8px">Escolha a filial</h3>
-      <label for="g-filial">Filial</label>
-      <select id="g-filial"></select>
-
-      <div style="height:8px"></div>
-      <label>Identificação</label>
-      <div class="row">
-        <label class="chip"><input type="radio" name="g-ident" value="nao" checked> Anônimo</label>
-        <label class="chip"><input type="radio" name="g-ident" value="sim"> Quero me identificar</label>
-      </div>
-
-      <div id="g-func-wrap" class="hidden" style="margin-top:8px">
-        <label for="g-func">Funcionário</label>
-        <select id="g-func"></select>
-      </div>
-
-      <div class="row cols-2" style="margin-top:14px">
-        <button class="btn btn-ghost" id="cancel-gate" type="button">Cancelar</button>
-        <button class="btn btn-primary" id="enter-gate" type="button">Entrar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PORTAL -->
-  <div class="wrap hidden" id="portal">
-    <header class="title">
-      <i class="fa-solid fa-comments"></i>
-      <div>
-        <h2 style="margin:0">Portal HS — Sugestões & Reclamações</h2>
-        <small id="contexto" class="muted">—</small>
+      <div class="inline muted">
+        <span id="protocolBox" class="proto" title="Protocolo desta sessão"></span>
       </div>
     </header>
 
-    <section class="panel pad">
-      <div class="cards">
-        <div class="card" data-card="produto"><h3><i class="fa-solid fa-shirt"></i>Produto</h3></div>
-        <div class="card" data-card="ferramentas"><h3><i class="fa-solid fa-screwdriver-wrench"></i>Ferramentas</h3></div>
-        <div class="card" data-card="geral"><h3><i class="fa-solid fa-lightbulb"></i>Geral</h3></div>
-        <div class="card" data-card="manutencoes"><h3><i class="fa-solid fa-toolbox"></i>Manutenções</h3></div>
+    <section class="hero card">
+      <div>
+        <h2>Envie uma avaliação sobre a loja ou um elogio/reclamação de um funcionário</h2>
+        <p class="muted">Você pode se identificar ou enviar de forma anônima. O feedback será encaminhado por e‑mail automaticamente para a equipe responsável.</p>
+        <div class="badges" aria-label="opções rápidas">
+          <span class="badge">Anonimato opcional</span>
+          <span class="badge">Rápido de preencher</span>
+          <span class="badge">Encaminhamento por e‑mail</span>
+        </div>
+      </div>
+      <div class="notice">
+        <div>ℹ️</div>
+        <div>
+          <strong>Privacidade:</strong> se optar por <em>anônimo</em>, não coletaremos nome, e‑mail ou telefone. Usamos apenas o que for necessário para entender seu relato.
+        </div>
+      </div>
+    </section>
+
+    <form id="formFeedback" class="card panel" novalidate>
+      <div class="grid cols-3">
+        <div class="row">
+          <label for="filial">Filial</label>
+          <select id="filial" name="filial" required>
+            <option value="" selected disabled>Selecione…</option>
+            <option value="293">293 — ARTUR</option>
+            <option value="488">488 — FLORIANO</option>
+            <option value="287">287 — JOTA</option>
+            <option value="288">288 — MODA</option>
+            <option value="761">761 — PONTO</option>
+          </select>
+          <div class="help">Escolha a loja relacionada ao seu feedback.</div>
+        </div>
+        <div class="row">
+          <label for="tipoEscopo">Tipo</label>
+          <select id="tipoEscopo" name="tipoEscopo" required>
+            <option value="" selected disabled>Selecione…</option>
+            <option value="loja">Avaliação da Loja</option>
+            <option value="funcionario">Elogio/Reclamação de Funcionário</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>Enviar como anônimo?</label>
+          <div class="inline">
+            <div id="anonSwitch" class="switch" role="switch" aria-checked="false" tabindex="0"><div class="knob"></div></div>
+            <input type="hidden" id="anonimo" name="anonimo" value="nao" />
+            <span class="help">Ative para ocultar seus dados pessoais.</span>
+          </div>
+        </div>
       </div>
 
-      <!-- FORM PRODUTO -->
-      <form id="form-produto" class="hidden" onsubmit="return enviar(event,'produto')">
-        <h3 style="margin:16px 0 8px">Produto</h3>
-        <div class="row cols-2">
-          <div><label for="p-item">Referência / Item</label><input id="p-item" type="text" placeholder="Ex.: 0241AX7EN" required></div>
-          <div><label for="p-cor">Cor</label><input id="p-cor" type="text" placeholder="Ex.: N10 (Preto)"></div>
+      <div id="blocoPessoal" class="panel card">
+        <div class="grid cols-3">
+          <div class="row"><label for="nome">Seu nome (obrigatório se não for anônimo)</label><input id="nome" name="nome" type="text" placeholder="Ex.: Maria Silva" /></div>
+          <div class="row"><label for="email">E‑mail (opcional)</label><input id="email" name="email" type="email" placeholder="seunome@email.com" /></div>
+          <div class="row"><label for="telefone">Telefone (opcional)</label><input id="telefone" name="telefone" type="text" placeholder="(xx) xxxxx‑xxxx" /></div>
         </div>
-        <div class="row cols-2">
-          <div><label for="p-tam">Tamanho</label><input id="p-tam" type="text" placeholder="PP / P / M / G / XG / …"></div>
-          <div><label for="p-msg">Observações</label><input id="p-msg" type="text" placeholder="Qtd, urgência, vitrine, etc."></div>
-        </div>
-        <div class="row cols-2" style="margin-top:10px">
-          <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
-          <button class="btn btn-primary" type="submit">Enviar</button>
-        </div>
-      </form>
+        <div class="help">Seus dados ajudam caso seja necessário retornar o contato — deixá‑los em branco mantém seu relato anônimo.</div>
+      </div>
 
-      <!-- FORM FERRAMENTAS -->
-      <form id="form-ferramentas" class="hidden" onsubmit="return enviar(event,'ferramentas')">
-        <h3 style="margin:16px 0 8px">Ferramentas</h3>
-        <div class="row cols-2">
-          <div>
-            <label for="f-app">Ferramenta</label>
-            <select id="f-app" required>
-              <option value="" disabled selected>Selecione…</option>
-              <option>Academia Hering</option>
-              <option>Indeva</option>
-              <option>Otto</option>
+      <div id="blocoLoja" class="panel card hidden">
+        <div class="grid cols-2">
+          <div class="row">
+            <label>Categoria(s) da avaliação</label>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="cats" value="Limpeza">Limpeza</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Organização">Organização</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Atendimento">Atendimento</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Falta de mercadoria">Falta de mercadoria</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Preço">Preço</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Troca/Devolução">Troca/Devolução</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Acessibilidade">Acessibilidade</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Tempo de espera">Tempo de espera</label>
+              <label class="chip"><input type="checkbox" name="cats" value="Ambiente/Música">Ambiente/Música</label>
+            </div>
+          </div>
+          <div class="row">
+            <label for="tipoMercadoria">Tipo de mercadoria (opcional)</label>
+            <input id="tipoMercadoria" name="tipoMercadoria" type="text" placeholder="Ex.: camisetas básicas, jeans, infantil…" />
+            <div class="help">Campo livre — preencha se o seu relato for sobre um tipo específico.</div>
+          </div>
+        </div>
+        <div class="row">
+          <label for="mensagemLoja">Conte-nos mais</label>
+          <textarea id="mensagemLoja" name="mensagemLoja" placeholder="Descreva com detalhes o que aconteceu, quando e com quem (se aplicável)."></textarea>
+        </div>
+        <div class="row">
+          <label for="anexosLoja">Anexar imagem (opcional)</label>
+          <input id="anexosLoja" name="anexosLoja" type="file" accept="image/*" />
+          <div class="help">Ajuda muito se tiver foto de etiqueta, gôndola, fila, etc.</div>
+        </div>
+      </div>
+
+      <div id="blocoFunc" class="panel card hidden">
+        <div class="grid cols-3">
+          <div class="row">
+            <label for="tipoRelato">O que você deseja registrar?</label>
+            <select id="tipoRelato" name="tipoRelato">
+              <option value="elogio">Elogio</option>
+              <option value="reclamacao">Reclamação</option>
+              <option value="avaliacao">Avaliação / Nota</option>
             </select>
           </div>
-          <div>
-            <label for="f-assunto">Assunto (opcional)</label>
-            <input id="f-assunto" type="text" placeholder="Ex.: erro no login / perda de acesso">
+          <div class="row">
+            <label for="cargo">Cargo</label>
+            <select id="cargo" name="cargo">
+              <option value="vendedor">Vendedor(a)</option>
+              <option value="gerente">Gerente</option>
+            </select>
+          </div>
+          <div class="row">
+            <label for="funcionario">Funcionário</label>
+            <select id="funcionario" name="funcionario">
+              <option value="" disabled selected>Escolha a filial primeiro</option>
+            </select>
+            <div class="help">A lista é carregada pela filial selecionada. Há também a opção "Outro" ao final.</div>
           </div>
         </div>
-        <label for="f-msg">Mensagem</label>
-        <textarea id="f-msg" placeholder="Descreva sua dúvida, reclamação ou sugestão" required></textarea>
-        <div class="row cols-2" style="margin-top:10px">
-          <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
-          <button class="btn btn-primary" type="submit">Enviar</button>
-        </div>
-      </form>
 
-      <!-- FORM GERAL -->
-      <form id="form-geral" class="hidden" onsubmit="return enviar(event,'geral')">
-        <h3 style="margin:16px 0 8px">Geral</h3>
-        <label for="g-msg">Mensagem</label>
-        <textarea id="g-msg" placeholder="Escreva livremente" required></textarea>
-        <div class="row cols-2" style="margin-top:10px">
-          <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
-          <button class="btn btn-primary" type="submit">Enviar</button>
+        <div id="blocoAvaliacao" class="row">
+          <label>Nota (1 a 5)</label>
+          <div class="rating" role="radiogroup" aria-label="nota de 1 a 5">
+            <img class="star" data-v="1" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23a3b3d6' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z'/></svg>" alt="1 estrela" />
+            <img class="star" data-v="2" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23a3b3d6' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z'/></svg>" alt="2 estrelas" />
+            <img class="star" data-v="3" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23a3b3d6' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z'/></svg>" alt="3 estrelas" />
+            <img class="star" data-v="4" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23a3b3d6' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z'/></svg>" alt="4 estrelas" />
+            <img class="star" data-v="5" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23a3b3d6' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z'/></svg>" alt="5 estrelas" />
+          </div>
+          <input type="hidden" id="nota" name="nota" value="0" />
         </div>
-      </form>
 
-      <!-- FORM MANUTENÇÕES -->
-      <form id="form-manutencoes" class="hidden" onsubmit="return enviar(event,'manutencoes')">
-        <h3 style="margin:16px 0 8px">Manutenções</h3>
-        <div class="row cols-2">
-          <div><label for="m-equip">Equipamento</label><input id="m-equip" type="text" placeholder="Ex.: Busca Preço" required></div>
-          <div><label for="m-tipo">Qual manutenção</label><input id="m-tipo" type="text" placeholder="Ex.: Não está funcionando" required></div>
+        <div class="row">
+          <label for="mensagemFunc">Detalhes do elogio/reclamação/avaliação</label>
+          <textarea id="mensagemFunc" name="mensagemFunc" placeholder="Conte como foi sua experiência com esse funcionário."></textarea>
         </div>
-        <label for="m-obs">Observações</label>
-        <textarea id="m-obs" placeholder="Descreva o que aconteceu (ex.: busca preço parou de funcionar.)" required></textarea>
-        <div class="row cols-2" style="margin-top:10px">
-          <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
-          <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="row">
+          <label class="inline">
+            <input id="consent" type="checkbox" /> Concordo com o uso dos meus dados para contato e melhoria do atendimento.
+          </label>
+          <div class="help">Obrigatório apenas quando <strong>não</strong> for anônimo.</div>
         </div>
-      </form>
-    </section>
+        <div class="row actions" style="justify-content:flex-end">
+          <button type="button" class="btn-ghost" id="btnLimpar">Limpar</button>
+          <button type="submit" class="btn-primary" id="btnEnviar">Enviar agora</button>
+        </div>
+      </div>
+
+      <div id="boxMsg" class="notice hidden" role="status" aria-live="polite"></div>
+    </form>
+
+    <footer>
+      © <span id="year"></span> HS Central — Canal de Feedback | <a href="#" class="muted" id="printLink">Imprimir/Salvar PDF</a>
+    </footer>
   </div>
 
-  <!-- LOADING -->
-  <div id="loading" class="loading"><div class="spinner"></div></div>
+<script>
+  const FUNCIONARIOS = {
+    '293': { vendedor: ['Tainara', 'Polyana'], gerente: ['Lucinele'] },
+    '488': { vendedor: ['Sara', 'Iolanda', 'Gabriela'], gerente: ['Meire'] },
+    '287': { vendedor: ['Vera', 'Karina', 'Rayssa'], gerente: ['Bruno'] },
+    '288': { vendedor: ['Maria', 'Marcia', 'Joana'], gerente: ['Dayane'] },
+    '761': { vendedor: ['Dani', 'Isadora', 'Paula'], gerente: ['Sônia'] }
+  };
 
-  <script>
-    // ========= CONFIG =========
-    const APP_URL = 'https://script.google.com/macros/s/AKfycbxgDjsyhSGMLsx6wyXDah62dtVsG9ywwMMr3ndhhU5bWRTVtldt6aX5tpq1oKUKVvJ8Pw/exec';
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const byId = id => document.getElementById(id);
+  const protocol = () => 'HS-' + new Date().toISOString().replace(/[-:T.Z]/g,'').slice(0,14);
+  const isAnon = () => byId('anonimo').value === 'sim';
 
-    const $ = s=>document.querySelector(s),
-          show=el=>el.classList.remove('hidden'),
-          hide=el=>el.classList.add('hidden');
-    const L = {on:()=>$('#loading').classList.add('show'), off:()=>$('#loading').classList.remove('show')};
+  byId('protocolBox').textContent = protocol();
+  byId('year').textContent = new Date().getFullYear();
 
-    let FILIAIS=[]; 
-    let CONTEXTO={codigo:'',razao:'',ident:false,funcionario:''};
+  const sw = byId('anonSwitch');
+  const setAnon = (on) => {
+    if(on){ sw.classList.add('on'); sw.setAttribute('aria-checked','true'); byId('anonimo').value='sim'; byId('blocoPessoal').classList.add('hidden'); byId('consent').checked=false; }
+    else { sw.classList.remove('on'); sw.setAttribute('aria-checked','false'); byId('anonimo').value='nao'; byId('blocoPessoal').classList.remove('hidden'); }
+  };
+  sw.addEventListener('click', ()=> setAnon(!sw.classList.contains('on')));
+  sw.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); sw.click(); }});
 
-    async function apiGet(params){
-      const url = APP_URL + '?' + new URLSearchParams(params).toString();
-      const r = await fetch(url,{method:'GET'});
-      if(!r.ok) throw new Error('Failed to fetch');
-      const json = await r.json();
-      if(json && json.error) throw new Error(json.error);
-      return json;
-    }
-    async function apiPost(body){
-      const r = await fetch(APP_URL,{method:'POST', body:JSON.stringify(body)});
-      if(!r.ok) throw new Error('Failed to fetch');
-      const json = await r.json();
-      if(json && json.error) throw new Error(json.error);
-      return json;
-    }
+  const toggleEscopo = () => {
+    const t = byId('tipoEscopo').value;
+    byId('blocoLoja').classList.toggle('hidden', t !== 'loja');
+    byId('blocoFunc').classList.toggle('hidden', t !== 'funcionario');
+  };
+  byId('tipoEscopo').addEventListener('change', toggleEscopo);
 
-    async function bootHome(){
-      try{
-        L.on();
-        const home = await apiGet({fn:'getHome'});
-        renderCombos(home.combos||[]);
-        // FIX: backend retorna "recados"
-        renderMural(home.recados||[]);
-      }catch(e){
-        console.error(e);
-        $('#combos-body').innerHTML = `<tr><td class="muted" colspan="4">Falha ao carregar.</td></tr>`;
-        $('#mural-list').innerHTML = `<div class="muted">Falha ao carregar.</div>`;
-      }finally{ L.off(); }
-    }
+  const carregarFuncionarios = () => {
+    const filial = byId('filial').value; const cargo = byId('cargo').value; const sel = byId('funcionario');
+    sel.innerHTML = '';
+    if(!filial){ sel.innerHTML = '<option disabled selected>Escolha a filial primeiro</option>'; return; }
+    const lista = (FUNCIONARIOS[filial] && FUNCIONARIOS[filial][cargo]) || [];
+    if(lista.length === 0){ sel.innerHTML = '<option disabled selected>Sem cadastro</option>'; return; }
+    sel.innerHTML = '<option disabled selected>Selecione…</option>' + lista.map(n => `<option value="${n}">${n}</option>`).join('') + '<option value="Outro">Outro (digitar no campo de detalhes)</option>';
+  };
+  byId('filial').addEventListener('change', ()=>{carregarFuncionarios();toggleEscopo();});
+  byId('cargo').addEventListener('change', carregarFuncionarios);
 
-    function renderCombos(list){
-      const tb = $('#combos-body');
-      if(!list.length){ tb.innerHTML = `<tr><td class="muted" colspan="4">Nenhum combo cadastrado.</td></tr>`; return; }
-      tb.innerHTML = list.map(c=>`
-        <tr>
-          <td>${escapeHtml(c.nome||'')}</td>
-          <td class="muted">${escapeHtml(c.artigos||'')}</td>
-          <td class="muted">${escapeHtml(c.codigos||'')}</td>
-          <td>${escapeHtml(c.condicao||'')}</td>
-        </tr>
-      `).join('');
-    }
+  const paintStars = (n) => { $$('.star').forEach((el,i)=>{ const on = i < n; const fill = on ? '%23ffd34d' : '%23a3b3d6'; el.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='${fill}' d='M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14l-5-4.87 6.91-1.01z'/></svg>`; }); };
+  $$('.star').forEach(el=> el.addEventListener('click', ()=>{ const v = +el.dataset.v; byId('nota').value = v; paintStars(v);}));
 
-    // FIX: usa campos do backend: mensagem, quando, autor
-    function renderMural(list){
-      const box = $('#mural-list');
-      if(!list.length){
-        box.innerHTML = `<div class="muted">Sem recados no momento.</div>`;
-        return;
-      }
-      box.innerHTML = list.map(n=>`
-        <div class="note">
-          <div>${escapeHtml(n.mensagem||'')}</div>
-          <small>${escapeHtml(n.quando||'')}${n.autor ? ' — ' + escapeHtml(n.autor) : ''}</small>
-        </div>
-      `).join('');
+  byId('btnLimpar').addEventListener('click', ()=>{
+    byId('formFeedback').reset(); setAnon(false); paintStars(0); byId('protocolBox').textContent = protocol();
+    byId('boxMsg').className = 'notice hidden'; byId('boxMsg').textContent = '';
+    byId('blocoLoja').classList.add('hidden'); byId('blocoFunc').classList.add('hidden');
+    byId('funcionario').innerHTML = '<option disabled selected>Escolha a filial primeiro</option>';
+  });
+
+  byId('printLink').addEventListener('click', (e)=>{e.preventDefault(); window.print();});
+
+  function validar(){
+    const filial = byId('filial').value; const escopo = byId('tipoEscopo').value;
+    if(!filial || !escopo) return 'Selecione a filial e o tipo (Loja/Funcionário).';
+
+    // Se NÃO for anônimo, exigir consentimento e NOME
+    if(!isAnon()){
+      if(!byId('consent').checked) return 'Marque o consentimento para uso dos dados (ou ative o modo anônimo).';
+      const nome = byId('nome').value.trim();
+      if(!nome) return 'Informe seu nome (obrigatório quando não for anônimo).';
     }
 
-    async function openGate(){
-      $('#overlay').classList.add('show');
-      try{
-        L.on();
-        const {filiais} = await apiGet({fn:'getFiliais'});
-        FILIAIS = filiais||[];
-        const sel=$('#g-filial'); sel.innerHTML='';
-        FILIAIS.forEach(f=>{ const o=document.createElement('option'); o.value=f.codigo; o.textContent=f.razao; sel.appendChild(o) });
-        await atualizarIdentGate();
-        $('#g-filial').addEventListener('change', atualizarIdentGate, {once:true});
-        document.querySelectorAll('input[name="g-ident"]').forEach(r=>r.addEventListener('change', atualizarIdentGate));
-      }catch(err){ alert('Erro ao carregar filiais: '+err.message) }
-      finally{ L.off(); }
+    if(escopo==='loja'){
+      const msg = byId('mensagemLoja').value.trim(); if(!msg) return 'Descreva seu relato sobre a loja.';
+    } else {
+      const func = byId('funcionario').value; const msg = byId('mensagemFunc').value.trim(); const tipoRelato = byId('tipoRelato').value;
+      if(!func) return 'Selecione o funcionário (ou use "Outro" e descreva no texto).';
+      if(!msg) return 'Descreva seu elogio/reclamação/avaliação.';
+      if(tipoRelato==='avaliacao' && +byId('nota').value === 0) return 'Informe a nota (1 a 5) para a avaliação.';
+    }
+    return null;
+  }
+
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyipMWVLHxYE8hR3js46ZUmTm4zfGE2wZ8fqr_-fcHdR4v5xP_ujUZubghuu_imNcGkaQ/exec';
+
+  async function toBase64(file){ return new Promise((resolve,reject)=>{ const r=new FileReader(); r.onload=()=>resolve(String(r.result)); r.onerror=reject; r.readAsDataURL(file); }); }
+
+  byId('formFeedback').addEventListener('submit', async (e)=>{
+    e.preventDefault(); const err = validar(); const box = byId('boxMsg'); if(err){ box.className='notice err'; box.textContent='⚠️ ' + err; return; }
+
+    const escopo = byId('tipoEscopo').value;
+    const payload = {
+      protocolo: byId('protocolBox').textContent,
+      dataISO: new Date().toISOString(),
+      filial: byId('filial').value,
+      anonimo: isAnon(),
+      nome: byId('nome').value || null,
+      email: byId('email').value || null,
+      telefone: byId('telefone').value || null,
+      escopo,
+      consent: byId('consent').checked,
+    };
+
+    if(escopo==='loja'){
+      payload.categorias = $$('input[name="cats"]:checked').map(i=>i.value);
+      payload.tipoMercadoria = byId('tipoMercadoria').value || null;
+      payload.mensagem = byId('mensagemLoja').value.trim();
+      const f = byId('anexosLoja').files?.[0]; payload.anexo = f ? await toBase64(f) : null;
+    } else {
+      payload.tipoRelato = byId('tipoRelato').value; payload.cargo = byId('cargo').value; payload.funcionario = byId('funcionario').value; payload.nota = +byId('nota').value || null; payload.mensagem = byId('mensagemFunc').value.trim();
     }
 
-    async function atualizarIdentGate(){
-      const codigo=$('#g-filial').value; 
-      const ident=document.querySelector('input[name="g-ident"]:checked').value==='sim';
-      if(ident){
-        L.on();
-        try{
-          const list = await apiGet({fn:'getFuncionarios', codigo});
-          const sel=$('#g-func'); sel.innerHTML='';
-          const def=document.createElement('option'); def.value=''; def.selected=true; def.disabled=true; def.textContent='Selecione seu nome…'; sel.appendChild(def);
-          (list||[]).forEach(n=>{ const o=document.createElement('option'); o.textContent=n; sel.appendChild(o) });
-          show($('#g-func-wrap'));
-        }catch(err){ alert('Erro ao carregar funcionários: '+err.message) }
-        finally{ L.off(); }
-      } else { hide($('#g-func-wrap')) }
+    try {
+      const box = byId('boxMsg'); box.className='notice'; box.textContent='⏳ Enviando seu feedback…';
+      await fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(payload) });
+      box.className='notice ok'; box.innerHTML = `✅ Obrigado! Seu protocolo é <strong>${payload.protocolo}</strong>. Você receberá retorno se necessário.`;
+      (document.scrollingElement||document.documentElement).scrollTo({top:0,behavior:'smooth'});
+    } catch (e) {
+      console.error(e); const box = byId('boxMsg'); box.className='notice err'; box.textContent='❌ Não foi possível enviar agora: ' + (e.message || e);
     }
-
-    function closeGate(){ $('#overlay').classList.remove('show'); }
-
-    function entrarPortal(){
-      try{
-        const ident = document.querySelector('input[name="g-ident"]:checked').value==='sim';
-        if(ident && !$('#g-func').value){ alert('Selecione o funcionário.'); return }
-        const sel=$('#g-filial');
-        CONTEXTO.codigo = sel.value;
-        CONTEXTO.razao  = sel.options[sel.selectedIndex]?.textContent || sel.value;
-        CONTEXTO.ident = ident;
-        CONTEXTO.funcionario = ident ? $('#g-func').value : '';
-        $('#contexto').textContent = `${CONTEXTO.razao}${CONTEXTO.ident && CONTEXTO.funcionario? ' • '+CONTEXTO.funcionario : ''}`;
-
-        closeGate();
-        hide($('#home')); show($('#portal'));
-
-        document.querySelectorAll('.card').forEach(c=>c.onclick=()=>{
-          hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes'));
-          show($('#form-'+c.dataset.card));
-          window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
-        });
-      }catch(err){ alert('Erro ao entrar: '+err.message) }
-    }
-
-    function resetar(){ hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes')) }
-
-    async function enviar(ev,tipo){
-      ev.preventDefault();
-      const payload={ action:'submitRegistro', tipo, ...CONTEXTO };
-      if(tipo==='produto'){
-        payload.item=$('#p-item').value.trim(); payload.cor=$('#p-cor').value.trim();
-        payload.tamanho=$('#p-tam').value.trim(); payload.mensagem=$('#p-msg').value.trim();
-      } else if(tipo==='ferramentas'){
-        payload.subtipo=$('#f-app').value; payload.assunto=$('#f-assunto').value.trim(); payload.mensagem=$('#f-msg').value.trim();
-      } else if(tipo==='geral'){
-        payload.mensagem=$('#g-msg').value.trim();
-      } else if(tipo==='manutencoes'){
-        payload.equipamento=$('#m-equip').value.trim();
-        payload.manutencao=$('#m-tipo').value.trim();
-        payload.observacoes=$('#m-obs').value.trim();
-      }
-      try{ L.on(); await apiPost(payload); resetar(); ev.target.reset(); alert('Enviado!') }
-      catch(err){ alert('Erro: '+err.message) }
-      finally{ L.off(); }
-      return false;
-    }
-
-    function escapeHtml(s){ return String(s??'')
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-
-    window.addEventListener('load', bootHome);
-    $('#open-gate').addEventListener('click', openGate);
-    $('#cancel-gate').addEventListener('click', closeGate);
-    $('#enter-gate').addEventListener('click', entrarPortal);
-  </script>
+  });
+</script>
 </body>
 </html>
