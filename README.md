@@ -1,146 +1,76 @@
+EU consegui com essas versoes aqui 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <!-- Mobile responsivo + pinch-zoom habilitado -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
-  <title>HS — Comunicados & Combos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HS • Portal de Sugestões & Reclamações</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
   <style>
     :root{
       --bg:#0b1220; --card:#121a2b; --muted:#8aa0bf; --txt:#e9eefc; --brand:#43b0ff;
-      --radius:18px; --shadow:0 12px 36px rgba(17,25,40,.28);
-      --ring:0 0 0 3px rgba(67,176,255,.18);
+      --radius:18px; --shadow:0 10px 30px rgba(17,25,40,.25);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box} html,body{height:100%}
     body{
       margin:0;font:500 16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--txt);
-      background:radial-gradient(1400px 700px at 85% -10%,#123,#0b1220),linear-gradient(60deg,#0b1220,#0a1020)
+      background:radial-gradient(1200px 600px at 85% -10%,#123,#0b1220),linear-gradient(60deg,#0b1220,#0a1020)
     }
+    .wrap{max-width:1200px;margin:0 auto;padding:28px}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+    header .logo{
+      width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(135deg,#58c1ff,transparent),#0f172a;
+      display:grid;place-items:center;box-shadow:var(--shadow)
+    }
+    header h1{font-size:24px;margin:0}
+    header small{color:var(--muted)}
 
-    /* DESKTOP/LARGE (padrão) */
-    .wrap{max-width:1280px;margin:0 auto;padding:28px}
-    .title{display:flex;align-items:center;gap:10px;margin:8px 0 4px}
-    .title i{background:#0f1828;border:1px solid #243149;color:#8fbef0;width:34px;height:34px;border-radius:10px;display:grid;place-items:center}
-    .subtitle{color:var(--muted);font-size:14px;margin-bottom:18px}
     .panel{background:rgba(255,255,255,0.02);backdrop-filter:blur(2px);
-      border:1px solid rgba(255,255,255,0.09);border-radius:18px;box-shadow:var(--shadow)}
-    .panel.pad{padding:18px}
+      border:1px solid rgba(255,255,255,0.08);padding:18px;border-radius:16px;box-shadow:var(--shadow)}
+    .row{display:grid;gap:16px}
+    @media(min-width:900px){ .row.cols-2{grid-template-columns:1fr 1fr} }
 
-    /* Home grid – desktop 2 colunas, mural mais largo */
-    .home-grid{display:grid;grid-template-columns:3fr 2fr;gap:18px}
-
-    .card-heading{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
-    .card-heading i{color:#8fbef0}
-    .muted{color:var(--muted);font-size:13px}
-
-    /* Tabela combos */
-    .combo-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
-    .combo-table thead th{font-weight:600;text-align:left;padding:10px 12px;background:#0f1828;border-bottom:1px solid #22324f}
-    .combo-table tbody td{padding:10px 12px;border-bottom:1px solid #18243d}
-    .scroll{max-height:460px;overflow:auto;border:1px solid #1d2941;border-radius:14px}
-    .scroll::-webkit-scrollbar{height:10px;width:10px}
-    .scroll::-webkit-scrollbar-thumb{background:#2a3a5b;border-radius:14px}
-
-    /* Mural */
-    .mural{display:flex;flex-direction:column;gap:10px;max-height:460px;overflow:auto;padding-right:6px}
-    .note{background:#0f1828;border:1px solid #22324f;border-radius:14px;padding:12px}
-    .note h4{margin:0 0 6px;font-size:14px}
-    .note small{color:var(--muted);display:block;margin-top:6px}
-
-    /* CTA */
-    .cta{display:flex;justify-content:center;margin:22px 0 0}
-    .btn{border:0;border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:700}
-    .btn-primary{background:linear-gradient(135deg,#43b0ff,#3aa1ff);color:#07101f;box-shadow:var(--shadow)}
-    .btn-primary:active{transform:translateY(1px)}
-    .btn-ghost{background:#0e1626;border:1px solid #2b3a5b;color:var(--txt)}
-
-    /* Modal */
-    .overlay{position:fixed;inset:0;background:rgba(7,12,22,.72);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;z-index:50}
-    .overlay.show{display:flex}
-    .gate{width:min(560px,92vw);background:#0f1626;border:1px solid #2a3a5b;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
     label{display:block;margin:8px 0 6px;color:var(--muted);font-size:14px}
     select,input[type=text],textarea{
-      width:100%;background:#0e1626;border:1px solid #243149;border-radius:12px;padding:12px 14px;color:var(--txt);outline:none;transition:.2s}
-    select:focus,input:focus,textarea:focus{border-color:#37548a;box-shadow:var(--ring)}
-    .row{display:grid;gap:12px}
-    .row.cols-2{grid-template-columns:1fr 1fr}
+      width:100%;background:#0e1626;border:1px solid #243149;border-radius:12px;
+      padding:12px 14px;color:var(--txt);outline:none;transition:.2s
+    }
+    textarea{min-height:120px;resize:vertical}
+    select:focus,input:focus,textarea:focus{border-color:#37548a;box-shadow:0 0 0 3px rgba(67,176,255,.18)}
 
-    /* Loading */
-    .loading{position:fixed;inset:0;display:none;place-items:center;background:rgba(7,12,22,.72);backdrop-filter:blur(2px);z-index:60}
-    .loading.show{display:grid}
-    .spinner{width:54px;height:54px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:#43b0ff;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* Portal */
-    .hidden{display:none !important}
     .cards{display:grid;gap:16px;margin-top:10px}
     @media(min-width:900px){ .cards{grid-template-columns:repeat(4,1fr)} }
-    .card{background:var(--card);border:1px solid #1d2941;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);cursor:pointer}
+    .card{background:var(--card);border:1px solid #1d2941;border-radius:var(--radius);
+      padding:18px;box-shadow:var(--shadow);cursor:pointer;position:relative;overflow:hidden}
     .card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(17,25,40,.35)}
     .card i{font-size:22px;margin-right:10px;color:var(--brand)}
     .card h3{margin:0 0 6px;font-size:18px}
 
-    /* ===== MOBILE FULL-BLEED =====
-       Até 900px: cards em uma coluna, ocupando TODA a largura da viewport (edge-to-edge)
-    */
-    @media (max-width: 900px){
-      .wrap{max-width:none;padding:0}                 /* remove padding lateral do container */
-      .home-grid{grid-template-columns:1fr;gap:12px}  /* empilha os cards */
-      .panel.pad{padding:16px}                        /* leve ajuste de padding */
-      /* full-bleed: faz o card ocupar de borda a borda do aparelho */
-      .panel{border-radius:0;border-left:0;border-right:0}
-      .home-grid > .panel{margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw)}
-      .cta{margin:16px 0 0}
-    }
+    .hidden{display:none !important}
+    .actions{display:flex;gap:10px;margin-top:16px}
+    .btn{border:0;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:600}
+    .btn-primary{background:linear-gradient(135deg,#43b0ff,#3aa1ff);color:#07101f}
+    .btn-ghost{background:#0e1626;border:1px solid #2b3a5b;color:var(--txt)}
+
+    .gate{position:fixed;inset:0;background:rgba(7,12,22,.9);backdrop-filter:blur(4px);display:grid;place-items:center;z-index:40}
+    .gate-card{width:min(560px,92vw);background:#0f1626;border:1px solid #2a3a5b;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+    .gate h2{margin:0 0 8px}
+
+    /* Loading overlay */
+    .loading{position:fixed;inset:0;display:none;place-items:center;background:rgba(7,12,22,.72);backdrop-filter:blur(2px);z-index:50}
+    .loading.show{display:grid}
+    .spinner{width:54px;height:54px;border-radius:50%;border:6px solid rgba(255,255,255,.15);border-top-color:#43b0ff;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
-
-  <!-- HOME -->
-  <div class="wrap" id="home">
-    <div class="title"><i class="fa-solid fa-house"></i><h2 style="margin:0">Home — Comunicados & Combos</h2></div>
-    <div class="subtitle">Veja os recados e combos ativos. Selecione a filial para abrir o portal.</div>
-
-    <div class="panel pad home-grid">
-      <!-- Combos -->
-      <div class="panel pad">
-        <div class="card-heading"><i class="fa-solid fa-tags"></i><b>Combos ativos</b></div>
-        <div class="scroll" id="combos-box">
-          <table class="combo-table">
-            <thead>
-              <tr>
-                <th style="width:35%">Nome do combo</th>
-                <th style="width:25%">Artigos</th>
-                <th style="width:20%">Valor</th>
-                <th style="width:20%">Condição</th>
-              </tr>
-            </thead>
-            <tbody id="combos-body"><tr><td class="muted" colspan="4">Carregando…</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Mural -->
-      <div class="panel pad">
-        <div class="card-heading"><i class="fa-solid fa-clipboard"></i><b>Mural de recados</b></div>
-        <div class="mural" id="mural-list">
-          <div class="muted">Carregando…</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta">
-      <button class="btn btn-primary" id="open-gate"><i class="fa-solid fa-shop"></i> &nbsp;Escolher filial</button>
-    </div>
-  </div>
-
-  <!-- MODAL -->
-  <div id="overlay" class="overlay">
-    <div class="gate">
-      <h3 style="margin:0 0 8px">Escolha a filial</h3>
+  <!-- Gate inicial: escolher filial e identificação -->
+  <div id="gate" class="gate">
+    <div class="gate-card">
+      <h2>Escolha a filial</h2>
       <label for="g-filial">Filial</label>
       <select id="g-filial"></select>
 
@@ -156,24 +86,22 @@
         <select id="g-func"></select>
       </div>
 
-      <div class="row cols-2" style="margin-top:14px">
-        <button class="btn btn-ghost" id="cancel-gate" type="button">Cancelar</button>
-        <button class="btn btn-primary" id="enter-gate" type="button">Entrar</button>
+      <div class="actions" style="margin-top:14px">
+        <button class="btn btn-primary" id="btn-entrar" onclick="entrarPortal()">Entrar</button>
       </div>
     </div>
   </div>
 
-  <!-- PORTAL -->
-  <div class="wrap hidden" id="portal">
-    <header class="title">
-      <i class="fa-solid fa-comments"></i>
+  <div class="wrap hidden" id="site">
+    <header>
+      <div class="logo"><i class="fa-solid fa-comments"></i></div>
       <div>
-        <h2 style="margin:0">Portal HS — Sugestões & Reclamações</h2>
-        <small id="contexto" class="muted">—</small>
+        <h1>Portal HS — Sugestões & Reclamações</h1>
+        <small id="contexto">—</small>
       </div>
     </header>
 
-    <section class="panel pad">
+    <section class="panel">
       <div class="cards">
         <div class="card" data-card="produto"><h3><i class="fa-solid fa-shirt"></i>Produto</h3></div>
         <div class="card" data-card="ferramentas"><h3><i class="fa-solid fa-screwdriver-wrench"></i>Ferramentas</h3></div>
@@ -181,24 +109,36 @@
         <div class="card" data-card="manutencoes"><h3><i class="fa-solid fa-toolbox"></i>Manutenções</h3></div>
       </div>
 
-      <!-- FORM PRODUTO -->
+      <!-- FORM: Produto -->
       <form id="form-produto" class="hidden" onsubmit="return enviar(event,'produto')">
         <h3 style="margin:16px 0 8px">Produto</h3>
         <div class="row cols-2">
-          <div><label for="p-item">Referência / Item</label><input id="p-item" type="text" placeholder="Ex.: 0241AX7EN" required></div>
-          <div><label for="p-cor">Cor</label><input id="p-cor" type="text" placeholder="Ex.: N10 (Preto)"></div>
+          <div>
+            <label for="p-item">Referência / Item</label>
+            <input id="p-item" type="text" placeholder="Ex.: 0241AX7EN" required>
+          </div>
+          <div>
+            <label for="p-cor">Cor</label>
+            <input id="p-cor" type="text" placeholder="Ex.: N10 (Preto)">
+          </div>
         </div>
         <div class="row cols-2">
-          <div><label for="p-tam">Tamanho</label><input id="p-tam" type="text" placeholder="PP / P / M / G / XG / …"></div>
-          <div><label for="p-msg">Observações</label><input id="p-msg" type="text" placeholder="Qtd, urgência, vitrine, etc."></div>
+          <div>
+            <label for="p-tam">Tamanho</label>
+            <input id="p-tam" type="text" placeholder="PP / P / M / G / XG / …">
+          </div>
+          <div>
+            <label for="p-msg">Observações</label>
+            <input id="p-msg" type="text" placeholder="Qtd, urgência, vitrine, etc.">
+          </div>
         </div>
-        <div class="row cols-2" style="margin-top:10px">
+        <div class="actions">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </form>
 
-      <!-- FORM FERRAMENTAS -->
+      <!-- FORM: Ferramentas -->
       <form id="form-ferramentas" class="hidden" onsubmit="return enviar(event,'ferramentas')">
         <h3 style="margin:16px 0 8px">Ferramentas</h3>
         <div class="row cols-2">
@@ -218,33 +158,39 @@
         </div>
         <label for="f-msg">Mensagem</label>
         <textarea id="f-msg" placeholder="Descreva sua dúvida, reclamação ou sugestão" required></textarea>
-        <div class="row cols-2" style="margin-top:10px">
+        <div class="actions">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </form>
 
-      <!-- FORM GERAL -->
+      <!-- FORM: Geral -->
       <form id="form-geral" class="hidden" onsubmit="return enviar(event,'geral')">
         <h3 style="margin:16px 0 8px">Geral</h3>
         <label for="g-msg">Mensagem</label>
         <textarea id="g-msg" placeholder="Escreva livremente" required></textarea>
-        <div class="row cols-2" style="margin-top:10px">
+        <div class="actions">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
       </form>
 
-      <!-- FORM MANUTENÇÕES -->
+      <!-- FORM: Manutenções -->
       <form id="form-manutencoes" class="hidden" onsubmit="return enviar(event,'manutencoes')">
         <h3 style="margin:16px 0 8px">Manutenções</h3>
         <div class="row cols-2">
-          <div><label for="m-equip">Equipamento</label><input id="m-equip" type="text" placeholder="Ex.: Busca Preço" required></div>
-          <div><label for="m-tipo">Qual manutenção</label><input id="m-tipo" type="text" placeholder="Ex.: Não está funcionando" required></div>
+          <div>
+            <label for="m-equip">Equipamento</label>
+            <input id="m-equip" type="text" placeholder="Ex.: Busca Preço" required>
+          </div>
+          <div>
+            <label for="m-tipo">Qual manutenção</label>
+            <input id="m-tipo" type="text" placeholder="Ex.: Não está funcionando" required>
+          </div>
         </div>
         <label for="m-obs">Observações</label>
         <textarea id="m-obs" placeholder="Descreva o que aconteceu (ex.: busca preço parou de funcionar.)" required></textarea>
-        <div class="row cols-2" style="margin-top:10px">
+        <div class="actions">
           <button class="btn btn-ghost" type="button" onclick="resetar()">Cancelar</button>
           <button class="btn btn-primary" type="submit">Enviar</button>
         </div>
@@ -252,90 +198,58 @@
     </section>
   </div>
 
-  <!-- LOADING -->
   <div id="loading" class="loading"><div class="spinner"></div></div>
 
   <script>
-    // ========= CONFIG =========
-    const APP_URL = 'https://script.google.com/macros/s/AKfycbxgDjsyhSGMLsx6wyXDah62dtVsG9ywwMMr3ndhhU5bWRTVtldt6aX5tpq1oKUKVvJ8Pw/exec';
+    // ======== CONFIG ========
+    const APP_URL = 'https://script.google.com/macros/s/AKfycbxu_jVaotWytMOQh4UCZetFZFOxgk5ePrOkaviDd-qKNPiu2_8BjCaNczAVZzaDwAbj/exec';
 
-    const $ = s=>document.querySelector(s),
-          show=el=>el.classList.remove('hidden'),
-          hide=el=>el.classList.add('hidden');
-    const L = {on:()=>$('#loading').classList.add('show'), off:()=>$('#loading').classList.remove('show')};
+    const $ = s=>document.querySelector(s), show=el=>el.classList.remove('hidden'), hide=el=>el.classList.add('hidden');
+    const L = {on:()=>document.getElementById('loading').classList.add('show'), off:()=>document.getElementById('loading').classList.remove('show')};
 
     let FILIAIS=[]; 
     let CONTEXTO={codigo:'',razao:'',ident:false,funcionario:''};
 
+    // ======== API helpers ========
     async function apiGet(params){
       const url = APP_URL + '?' + new URLSearchParams(params).toString();
       const r = await fetch(url,{method:'GET'});
       if(!r.ok) throw new Error('Failed to fetch');
-      const json = await r.json();
-      if(json && json.error) throw new Error(json.error);
-      return json;
+      const data = await r.json();
+      if(data && data.error) throw new Error(data.error);
+      return data;
     }
+
+    // >>> ÚNICA MUDANÇA: sem header Content-Type pra evitar preflight <<<
     async function apiPost(body){
       const r = await fetch(APP_URL,{method:'POST', body:JSON.stringify(body)});
       if(!r.ok) throw new Error('Failed to fetch');
-      const json = await r.json();
-      if(json && json.error) throw new Error(json.error);
-      return json;
+      const data = await r.json();
+      if(data && data.error) throw new Error(data.error);
+      return data;
     }
 
-    async function bootHome(){
-      try{
-        L.on();
-        const home = await apiGet({fn:'getHome'});
-        renderCombos(home.combos||[]);
-        renderMural(home.mural||[]);
-      }catch(e){
-        console.error(e);
-        $('#combos-body').innerHTML = `<tr><td class="muted" colspan="4">Falha ao carregar.</td></tr>`;
-        $('#mural-list').innerHTML = `<div class="muted">Falha ao carregar.</div>`;
-      }finally{ L.off(); }
-    }
-    function renderCombos(list){
-      const tb = $('#combos-body');
-      if(!list.length){ tb.innerHTML = `<tr><td class="muted" colspan="4">Nenhum combo cadastrado.</td></tr>`; return; }
-      tb.innerHTML = list.map(c=>`
-        <tr>
-          <td>${escapeHtml(c.nome||'')}</td>
-          <td class="muted">${escapeHtml(c.artigos||'')}</td>
-          <td class="muted">${escapeHtml(c.codigos||'')}</td>
-          <td>${escapeHtml(c.condicao||'')}</td>
-        </tr>
-      `).join('');
-    }
-    function renderMural(list){
-      const box = $('#mural-list');
-      if(!list.length){ box.innerHTML = `<div class="muted">Sem recados no momento.</div>`; return; }
-      box.innerHTML = list.map(n=>`
-        <div class="note">
-          <h4>${escapeHtml(n.titulo||'')}</h4>
-          <div>${escapeHtml(n.mensagem||'')}</div>
-          <small>${escapeHtml(n.data||'')} — ${escapeHtml(n.autor||'-')}</small>
-        </div>
-      `).join('');
-    }
-
-    async function openGate(){
-      $('#overlay').classList.add('show');
+    // ======== Gate ========
+    async function boot(){
       try{
         L.on();
         const {filiais} = await apiGet({fn:'getFiliais'});
-        FILIAIS = filiais||[];
+        FILIAIS = filiais || [];
         const sel=$('#g-filial'); sel.innerHTML='';
         FILIAIS.forEach(f=>{ const o=document.createElement('option'); o.value=f.codigo; o.textContent=f.razao; sel.appendChild(o) });
         await atualizarIdentGate();
-        $('#g-filial').addEventListener('change', atualizarIdentGate, {once:true});
+        $('#g-filial').addEventListener('change', atualizarIdentGate);
         document.querySelectorAll('input[name="g-ident"]').forEach(r=>r.addEventListener('change', atualizarIdentGate));
-      }catch(err){ alert('Erro ao carregar filiais: '+err.message) }
-      finally{ L.off(); }
+      }catch(err){
+        alert('Erro ao carregar filiais: '+err.message);
+      }finally{ L.off(); }
     }
+
     async function atualizarIdentGate(){
       const codigo=$('#g-filial').value; 
       const ident=document.querySelector('input[name="g-ident"]:checked').value==='sim';
+      const btn=$('#btn-entrar');
+      btn.disabled=true;
       if(ident){
         L.on();
         try{
@@ -347,8 +261,8 @@
         }catch(err){ alert('Erro ao carregar funcionários: '+err.message) }
         finally{ L.off(); }
       } else { hide($('#g-func-wrap')) }
+      btn.disabled=false;
     }
-    function closeGate(){ $('#overlay').classList.remove('show'); }
 
     function entrarPortal(){
       try{
@@ -361,8 +275,9 @@
         CONTEXTO.funcionario = ident ? $('#g-func').value : '';
         $('#contexto').textContent = `${CONTEXTO.razao}${CONTEXTO.ident && CONTEXTO.funcionario? ' • '+CONTEXTO.funcionario : ''}`;
 
-        closeGate();
-        hide($('#home')); show($('#portal'));
+        const gate = document.getElementById('gate');
+        if(gate){ gate.parentNode.removeChild(gate); }
+        show(document.getElementById('site'));
 
         document.querySelectorAll('.card').forEach(c=>c.onclick=()=>{
           hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes'));
@@ -372,6 +287,7 @@
       }catch(err){ alert('Erro ao entrar: '+err.message) }
     }
 
+    // ======== Envio ========
     function resetar(){ hide($('#form-produto')); hide($('#form-ferramentas')); hide($('#form-geral')); hide($('#form-manutencoes')) }
     async function enviar(ev,tipo){
       ev.preventDefault();
@@ -394,14 +310,10 @@
       return false;
     }
 
-    function escapeHtml(s){ return String(s??'')
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-
-    window.addEventListener('load', bootHome);
-    $('#open-gate').addEventListener('click', openGate);
-    $('#cancel-gate').addEventListener('click', closeGate);
-    $('#enter-gate').addEventListener('click', entrarPortal);
+    window.addEventListener('load', boot);
   </script>
 </body>
 </html>
+
+
+
